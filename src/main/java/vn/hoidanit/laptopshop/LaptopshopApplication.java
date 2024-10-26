@@ -17,5 +17,4 @@ public class LaptopshopApplication {
 			System.out.println(s);
 		}
 	}
-
 }

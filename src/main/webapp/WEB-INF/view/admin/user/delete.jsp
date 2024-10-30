@@ -29,7 +29,7 @@
                             <div class="alert alert-danger">
                                 Are you sure to delete this user ?
                             </div>
-                            <form:form method="post" action="admin/user/delete" modelAttribute="newUser">
+                            <form:form method="post" action="/admin/user/delete" modelAttribute="newUser">
                                 <div class=mb-3 style="display: none;">
                                     <label class="form-label">ID :</label>
                                     <form:input value="${id}" type="text" class="form-control" path="id" />

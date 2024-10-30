@@ -8,10 +8,10 @@ import vn.hoidanit.laptopshop.repository.UserRepository;
 
 @Service
 public class UserService {
-    private final UserRepository userrepository;
+    private final UserRepository userRepository;
 
-    public UserService(UserRepository userrepository) {
-        this.userrepository = userrepository;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     public String handleHello() {
@@ -19,25 +19,25 @@ public class UserService {
     }
 
     public List<User> getAllUser() {
-        return this.userrepository.findAll();
+        return this.userRepository.findAll();
     }
 
     public List<User> getAllUserByEmail(String email) {
-        return this.userrepository.findOneByEmail(email);
+        return this.userRepository.findOneByEmail(email);
     }
 
     public User handleSaveUser(User user) {
-        User ahryxx = this.userrepository.save(user);
+        User ahryxx = this.userRepository.save(user);
         System.out.println(ahryxx);
         return ahryxx;
     }
 
     public User getUserById(long id) {
-        return this.userrepository.findById(id);
+        return this.userRepository.findById(id);
     }
 
     public void deleteAUser(long id) {
-        this.userrepository.deleteById(id);
+        this.userRepository.deleteById(id);
     }
 
 }

@@ -28,7 +28,7 @@
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
                                     <li class="breadcrumb-item active"><a href="/admin/user">user</a></li>
-                                    <li class="breadcrumb-item active">delete</li>
+                                    <li class="breadcrumb-item active">update</li>
                                 </ol>
                                 <div class="mt-5">
                                     <div class="row">
@@ -36,7 +36,7 @@
                                             <h3>Update User</h3>
                                             <hr />
                                             <form:form method="post" action="/admin/user/update"
-                                                modelAttribute="newUser">
+                                                modelAttribute="newUser" class="row" enctype="multipart/form-data">
                                                 <div class=mb-3 style="display: none;">
                                                     <label class="form-label">ID :</label>
                                                     <form:input type="text" class="form-control" path="id" />
@@ -48,19 +48,37 @@
                                                         disabled="true" />
                                                 </div>
 
-                                                <div class=mb-3>
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Phone number :</label>
                                                     <form:input type="text" class="form-control" path="phone" />
                                                 </div>
 
-                                                <div class=mb-3>
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Full Name :</label>
                                                     <form:input type="fullName" class="form-control" path="fullName" />
                                                 </div>
 
-                                                <div class=mb-3>
+                                                <div class="mb-3">
                                                     <label class="form-label">Address :</label>
                                                     <form:input type="address" class="form-control" path="address" />
+                                                </div>
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="form-label">Role:</label>
+                                                    <form:select class="form-select" path="role.name">
+                                                        <form:option value="ADMIN">ADMIN</form:option>
+                                                        <form:option value="USER">USER</form:option>
+                                                    </form:select>
+                                                </div>
+
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label for="avatarFile" class="form-label">Avatar</label>
+                                                    <input class="form-control" type="file" id="avatarFile"
+                                                        accept=".png, .jpg, .jpeg" name="ahryxxFile" />
+                                                </div>
+
+                                                <div class="col-12 mb-3">
+                                                    <img style="max-height: 250px; display: none;" alt="avatar previeww"
+                                                        id="avatarPreview" />
                                                 </div>
 
                                                 <button tupe="submit" class="btn btn-warning">Update</button>

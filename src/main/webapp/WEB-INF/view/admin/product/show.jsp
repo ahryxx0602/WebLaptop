@@ -63,9 +63,7 @@
                                                                     class="btn btn-danger">Delete</a>
                                                             </td>
                                                         </tr>
-
                                                     </c:forEach>
-
                                                 </tbody> -->
                                             </table>
                                         </div>

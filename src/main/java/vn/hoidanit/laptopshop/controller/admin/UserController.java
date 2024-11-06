@@ -83,9 +83,11 @@ public class UserController {
         }
 
         String hashPassword = this.passwordEncoder.encode(ahryxx.getPassword());
-        String avatar = this.uploadService.handleSaveUpLoadFile(file, "avatar");
 
+        // Image
+        String avatar = this.uploadService.handleSaveUpLoadFile(file, "avatar");
         ahryxx.setAvatar(avatar);
+
         ahryxx.setPassword(hashPassword);
         ahryxx.setRole(this.userService.getRoleByName(ahryxx.getRole().getName()));
 

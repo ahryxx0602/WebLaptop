@@ -28,7 +28,7 @@ public class User {
     private String email;
 
     @NotNull
-    @Size(min = 2, message = "Your password must be at least 2 character. Please try anotther.")
+    @Size(min = 2, message = "Your password must be at least 2 character. Please try another.")
     private String password;
 
     @NotNull

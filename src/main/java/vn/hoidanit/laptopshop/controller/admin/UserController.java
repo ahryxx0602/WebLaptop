@@ -87,10 +87,8 @@ public class UserController {
         // Image
         String avatar = this.uploadService.handleSaveUpLoadFile(file, "avatar");
         ahryxx.setAvatar(avatar);
-
         ahryxx.setPassword(hashPassword);
         ahryxx.setRole(this.userService.getRoleByName(ahryxx.getRole().getName()));
-
         // save
         this.userService.handleSaveUser(ahryxx);
         return "redirect:/admin/user";

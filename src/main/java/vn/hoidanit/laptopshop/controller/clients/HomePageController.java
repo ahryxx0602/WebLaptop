@@ -73,6 +73,12 @@ public class HomePageController {
         return "client/auth/login";
     }
 
+    // @GetMapping("/register")
+    // public String getRegisterPage(Model model) {
+    // model.addAttribute("registerUser", new RegisterDTO());
+    // return "client/auth/register";
+    // }
+
     // @PostMapping("/login")
     // public String handleLogin(@ModelAttribute("user"), BindingResult
     // bindingResult) {

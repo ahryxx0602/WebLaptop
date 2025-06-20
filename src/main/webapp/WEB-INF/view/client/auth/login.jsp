@@ -20,34 +20,32 @@
                         <main>
                             <div class="container">
                                 <div class="row justify-content-center">
-                                    <div class="col-lg-7">
+                                    <div class="col-md-6 col-lg-5">
                                         <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                            <div class="card-header">
-                                                <h3 class="text-center font-weight-light my-4">Login Form</h3>
+                                            <div class="card-header text-center mb-4">
+                                                <i class="fas fa-user-circle fa-3x text-primary mb-2"></i>
+                                                <h3 class="mb-0">Đăng nhập</h3>
+                                                <p class="text-muted small">Chào mừng bạn quay lại!</p>
                                             </div>
                                             <div class="card-body">
-                                                <form:form method="POST" action="/login" modelAttribute="user">
+                                                <form>
                                                     <div class="form-floating mb-3">
-                                                        <form:input class="form-control" type="email"
-                                                            placeholder="name@example.com" path="email" />
+                                                        <input class="form-control" type="email"
+                                                            placeholder="name@example.com"/>
                                                         <label>Email address</label>
                                                     </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-6">
-                                                            <div class="form-floating mb-3 mb-md-0">
-                                                                <form:input class="form-control" type="password"
-                                                                    placeholder="Create a password" path="password" />
-                                                                <label>Password</label>
-                                                            </div>
+                                                        <div class="form-floating mb-3 mb-md-0">
+                                                            <input class="form-control" type="password"
+                                                                placeholder="Create a password"/>
+                                                            <label>Password</label>
                                                         </div>
-                                                    </div>
                                                     <div class="mt-4 mb-0">
                                                         <div class="d-grid"><button
                                                                 class="btn btn-primary btn-block">Login
                                                             </button>
                                                         </div>
                                                     </div>
-                                                </form:form>
+                                                </form>
                                             </div>
                                             <div class="card-footer text-center py-3">
                                                 <div class="small"><a href="/register">Don't have an account? Go to

@@ -8,8 +8,8 @@
                 <meta charset="utf-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
-                <meta name="author" content="Hỏi Dân IT" />
+                <meta name="description" content="Ahryxx - Dự án laptopshop" />
+                <meta name="author" content="Ahryxx" />
                 <title>Update User</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -37,12 +37,12 @@
                                             <hr />
                                             <form:form method="post" action="/admin/user/update"
                                                 modelAttribute="newUser" class="row" enctype="multipart/form-data">
-                                                <div class=mb-3 style="display: none;">
+                                                <div class="mb-3" style="display: none;">
                                                     <label class="form-label">ID :</label>
                                                     <form:input type="text" class="form-control" path="id" />
                                                 </div>
 
-                                                <div class=mb-3>
+                                                <div class="mb-3">
                                                     <label class="form-label">Email :</label>
                                                     <form:input type="email" class="form-control" path="email"
                                                         disabled="true" />
@@ -73,15 +73,17 @@
                                                 <div class="mb-3 col-12 col-md-6">
                                                     <label for="avatarFile" class="form-label">Avatar</label>
                                                     <input class="form-control" type="file" id="avatarFile"
-                                                        accept=".png, .jpg, .jpeg" name="ahryxxFile" />
+                                                        accept=".png, .jpg, .jpeg" name="avatarFile" />
                                                 </div>
 
                                                 <div class="col-12 mb-3">
-                                                    <img style="max-height: 250px; display: none;" alt="avatar previeww"
+                                                    <img style="max-height: 250px; display: none;" alt="avatar preview"
                                                         id="avatarPreview" />
                                                 </div>
-
-                                                <button tupe="submit" class="btn btn-warning">Update</button>
+                                                <div class="d-flex gap-2">
+                                                    <button tupe="submit" class="btn btn-warning w-50">Update</button>
+                                                    <a href="/admin/user" class="btn btn-success w-50">Back</a>
+                                                </div>
                                             </form:form>
                                         </div>
                                     </div>

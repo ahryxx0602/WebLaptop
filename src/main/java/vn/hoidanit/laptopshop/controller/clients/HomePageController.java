@@ -50,10 +50,11 @@ public class HomePageController {
     @PostMapping("/register")
     public String handleRegister(@ModelAttribute("registerUser") @Valid RegisterDTO registerDTO,
             BindingResult bindingResult) {
-        List<FieldError> errors = bindingResult.getFieldErrors();
-        for (FieldError error : errors) {
-            System.out.println(">>>" + error.getField() + " - " + error.getDefaultMessage());
+        // Neu co loi thi hien thi qua view
+        if (bindingResult.hasErrors()) {
+            return "/client/auth/register";
         }
+
         User user = this.userService.registerDTOtoUser(registerDTO);
 
         String hashPassword = this.passwordEncoder.encode(user.getPassword());
@@ -63,13 +64,20 @@ public class HomePageController {
         // saves
         this.userService.handleSaveUser(user);
         return "redirect:/login";
-
     }
 
     @GetMapping("/login")
     public String getLoginPage(Model model) {
-
+        // List<User> users = this.userService.getAllUser();
+        // model.addAllAttributes("user", users);
         return "client/auth/login";
     }
+
+    // @PostMapping("/login")
+    // public String handleLogin(@ModelAttribute("user"), BindingResult
+    // bindingResult) {
+
+    // return "redirect:/";
+    // }
 
 }

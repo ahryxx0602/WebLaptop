@@ -40,7 +40,7 @@ public class UserController {
     public String getHomePage(Model model) {
         List<User> arrUsers = this.userService.getAllUserByEmail("redcream2004@gmail.com");
         System.out.println(arrUsers);
-        model.addAttribute("Ahryxx", "test");
+        model.addAttribute("UserUser", "test");
         model.addAttribute("Pvt", "From controller with model");
         return "hello";
     }
@@ -48,7 +48,7 @@ public class UserController {
     @RequestMapping("/admin/user")
     public String getUserPage(Model model) {
         List<User> users = this.userService.getAllUser();
-        model.addAttribute("users1", users);
+        model.addAttribute("users", users);
         return "admin/user/show";
     }
 
@@ -68,9 +68,9 @@ public class UserController {
 
     @PostMapping(value = "/admin/user/create")
     public String CreateUserPage(Model model,
-            @ModelAttribute("newUser") @Valid User ahryxx,
+            @ModelAttribute("newUser") @Valid User user,
             BindingResult newUserBindingResult,
-            @RequestParam("ahryxxFile") MultipartFile file) {
+            @RequestParam("avatarFile") MultipartFile file) {
 
         List<FieldError> errors = newUserBindingResult.getFieldErrors();
         for (FieldError error : errors) {
@@ -82,15 +82,15 @@ public class UserController {
             return "/admin/user/create";
         }
 
-        String hashPassword = this.passwordEncoder.encode(ahryxx.getPassword());
+        String hashPassword = this.passwordEncoder.encode(user.getPassword());
 
         // Image
         String avatar = this.uploadService.handleSaveUpLoadFile(file, "avatar");
-        ahryxx.setAvatar(avatar);
-        ahryxx.setPassword(hashPassword);
-        ahryxx.setRole(this.userService.getRoleByName(ahryxx.getRole().getName()));
+        user.setAvatar(avatar);
+        user.setPassword(hashPassword);
+        user.setRole(this.userService.getRoleByName(user.getRole().getName()));
         // save
-        this.userService.handleSaveUser(ahryxx);
+        this.userService.handleSaveUser(user);
         return "redirect:/admin/user";
     }
 
@@ -102,15 +102,15 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/update")
-    public String getUpdateUserPage(Model model, @ModelAttribute("newUser") User ahryxx,
-            @RequestParam("ahryxxFile") MultipartFile file) {
+    public String getUpdateUserPage(Model model, @ModelAttribute("newUser") User user,
+            @RequestParam("avatarFile") MultipartFile file) {
         String avatar = this.uploadService.handleSaveUpLoadFile(file, "avatar");
-        User currentUser = this.userService.getUserById(ahryxx.getId());
+        User currentUser = this.userService.getUserById(user.getId());
         if (currentUser != null) {
-            currentUser.setAddress(ahryxx.getAddress());
-            currentUser.setFullName(ahryxx.getFullName());
-            currentUser.setPhone(ahryxx.getPhone());
-            currentUser.setRole(this.userService.getRoleByName(ahryxx.getRole().getName()));
+            currentUser.setAddress(user.getAddress());
+            currentUser.setFullName(user.getFullName());
+            currentUser.setPhone(user.getPhone());
+            currentUser.setRole(this.userService.getRoleByName(user.getRole().getName()));
             currentUser.setAvatar(avatar);
 
             this.userService.handleSaveUser(currentUser);
@@ -128,8 +128,8 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/delete")
-    public String postDeleteUser(Model model, @ModelAttribute("newUser") User ahryxx) {
-        this.userService.deleteAUser(ahryxx.getId());
+    public String postDeleteUser(Model model, @ModelAttribute("newUser") User user) {
+        this.userService.deleteAUser(user.getId());
         return "redirect:/admin/user";
     }
 }

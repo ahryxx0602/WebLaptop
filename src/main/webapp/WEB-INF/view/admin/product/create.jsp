@@ -8,16 +8,16 @@
                 <meta charset="utf-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
-                <meta name="author" content="Hỏi Dân IT" />
+                <meta name="description" content="Ahryxx - Dự án laptopshop" />
+                <meta name="author" content="Ahryxx" />
                 <title>Create Product</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
                 <script>
                     $(document).ready(() => {
-                        const avatarFile = $("#avatarFile");
-                        avatarFile.change(function (e) {
+                        const productImage = $("#productImage");
+                        productImage.change(function (e) {
                             const imgURL = URL.createObjectURL(e.target.files[0]);
                             $("#avatarPreview").attr("src", imgURL);
                             $("#avatarPreview").css({ "display": "block" });
@@ -60,7 +60,6 @@
                                                     <form:errors path="detailDesc" cssClass="invalid-feedback" />
                                                 </c:set>
                                                 <c:set var="errorShortDesc">
-                                                    <form:errors path="shortDesc" cssClass="invalid-feedback" />
                                                 </c:set>
                                                 <c:set var="errorQuantity">
                                                     <form:errors path="quantity" cssClass="invalid-feedback" />
@@ -128,23 +127,23 @@
                                                         <form:option value="THIET-KE-DO-HOA">Thiết kế đồ họa
                                                         </form:option>
                                                         <form:option value="MONG-NHE">Mỏng nhẹ</form:option>
-                                                        <form:option value="DANH-NHAN">Doanh nhân</form:option>
+                                                        <form:option value="DOANH-NHAN">Doanh nhân</form:option>
                                                     </form:select>
                                                 </div>
 
                                                 <div class="mb-3 col-12 col-md-6">
-                                                    <label for="avatarFile" class="form-label">Image:</label>
-                                                    <input class="form-control" type="file" id="avatarFile"
-                                                        accept=".png, .jpg, .jpeg" name="ahryxxFile" />
+                                                    <label for="productImage" class="form-label">Image:</label>
+                                                    <input class="form-control" type="file" id="productImage"
+                                                        accept=".png, .jpg, .jpeg" name="productImage" />
                                                 </div>
 
                                                 <div class="col-12 mb-3">
-                                                    <img style="max-height: 250px; display: none;" alt="avatar previeww"
+                                                    <img style="max-height: 250px; display: none;" alt="avatar preview"
                                                         id="avatarPreview" />
                                                 </div>
-
-                                                <div class="col-12 mb-5"> <button type="submit"
-                                                        class="btn btn-primary">Create</button>
+                                                <div class="d-flex gap-2">
+                                                    <button type="submit" class="btn btn-primary w-50">Create</button>
+                                                    <a href="/admin/product" class="btn btn-success w-50">Back</a>
                                                 </div>
 
                                             </form:form>

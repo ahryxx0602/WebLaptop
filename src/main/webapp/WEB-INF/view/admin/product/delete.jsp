@@ -8,8 +8,8 @@
                 <meta charset="utf-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
-                <meta name="author" content="Hỏi Dân IT" />
+                <meta name="description" content="Ahryxx - Dự án laptopshop" />
+                <meta name="author" content="Ahryxx" />
                 <title>Delete Product</title>
                 <link href="/css/styles.css" rel="stylesheet" />
 
@@ -31,7 +31,7 @@
                                 </ol>
                                 <div class=" mt-5">
                                     <div class="row">
-                                        <div class="col-12 mx-auto">
+                                        <div class="col-md-6 col-12 mx-auto">
                                             <div class="d-flex justify-content-between">
                                                 <h3>Delete the product with id = ${id}</h3>
                                             </div>
@@ -47,7 +47,10 @@
                                                     <form:input value="${id}" type="text" class="form-control"
                                                         path="id" />
                                                 </div>
-                                                <button class="btn btn-danger">Confirm</button>
+                                                <div class="d-flex gap-2">
+                                                    <button class="btn btn-danger w-50">Confirm</button>
+                                                    <a href="/admin/product" class="btn btn-success w-50">Back</a>
+                                                </div>
                                             </form:form>
 
                                         </div>

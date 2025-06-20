@@ -8,8 +8,8 @@
                 <meta charset="utf-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
-                <meta name="author" content="Hỏi Dân IT" />
+                <meta name="description" content="Ahryxx - Dự án laptopshop" />
+                <meta name="author" content="Ahryxx" />
                 <title>Manage User</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -47,8 +47,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <c:forEach var="user" items="${users1}">
-
+                                                    <c:forEach var="user" items="${users}">
                                                         <tr>
                                                             <th>${user.id}</th>
                                                             <td>${user.email}</td>
@@ -63,7 +62,6 @@
                                                                     class="btn btn-danger">Delete</a>
                                                             </td>
                                                         </tr>
-
                                                     </c:forEach>
 
                                                 </tbody>

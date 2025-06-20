@@ -8,8 +8,8 @@
                 <meta charset="utf-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
-                <meta name="author" content="Hỏi Dân IT" />
+                <meta name="description" content="Ahryxx - Dự án laptopshop" />
+                <meta name="author" content="Ahryxx" />
                 <title>Update Product</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -17,7 +17,7 @@
 
                 <script>
                     $(document).ready(() => {
-                        const avatarFile = $("#avatarFile");
+                        const productImage = $("#productImage");
                         const orgImage = "${newProduct.image}";
                         if (orgImage) {
                             const urlImage = "/images/product/" + orgImage;
@@ -25,7 +25,7 @@
                             $("#avatarPreview").css({ "display": "block" });
                         }
 
-                        avatarFile.change(function (e) {
+                        productImage.change(function (e) {
                             const imgURL = URL.createObjectURL(e.target.files[0]);
                             $("#avatarPreview").attr("src", imgURL);
                             $("#avatarPreview").css({ "display": "block" });
@@ -145,17 +145,21 @@
                                                 </div>
 
                                                 <div class="mb-3 col-12 col-md-6">
-                                                    <label for="avatarFile" class="form-label">Image</label>
-                                                    <input class="form-control" type="file" id="avatarFile"
-                                                        accept=".png, .jpg, .jpeg" name="ahryxxFile" />
+                                                    <label for="productImage" class="form-label">Image</label>
+                                                    <input class="form-control" type="file" id="productImage"
+                                                        accept=".png, .jpg, .jpeg" name="productImage" />
                                                 </div>
 
                                                 <div class="col-12 mb-3">
-                                                    <img style="max-height: 250px; display: none;" alt="avatar previeww"
+                                                    <img style="max-height: 250px; display: none;" alt="avatar preview"
                                                         id="avatarPreview" />
                                                 </div>
 
-                                                <button tupe="submit" class="btn btn-warning">Update</button>
+                                                
+                                                <div class="d-flex gap-2">
+                                                    <button tupe="submit" class="btn btn-warning w-50">Update</button>
+                                                    <a href="/admin/product" class="btn btn-success w-50">Back</a>
+                                                </div>
                                             </form:form>
                                         </div>
                                     </div>

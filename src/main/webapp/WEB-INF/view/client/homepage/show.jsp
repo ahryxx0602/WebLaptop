@@ -67,14 +67,8 @@
                 </div>
                 <!-- Modal Search End -->
 
-
-
                 <!--BANNER-->
                 <jsp:include page="../layout/banner.jsp" />
-
-
-
-
 
                 <!-- Fruits Shop Start-->
                 <div class="container-fluid fruite py-5">

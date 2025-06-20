@@ -34,9 +34,9 @@ public class UserService {
     }
 
     public User handleSaveUser(User user) {
-        User ahryxx = this.userRepository.save(user);
-        System.out.println(ahryxx);
-        return ahryxx;
+        User savedUser = this.userRepository.save(user);
+        System.out.println(savedUser);
+        return savedUser;
     }
 
     public User getUserById(long id) {
@@ -62,5 +62,9 @@ public class UserService {
         user.setPhone("");
         user.setRole(getRoleByName("USER"));
         return user;
+    }
+
+    public boolean checkEmailExist(String email) {
+        return this.userRepository.existsByEmail(email);
     }
 }

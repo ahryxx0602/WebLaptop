@@ -8,9 +8,9 @@
                 <meta charset="utf-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
-                <meta name="author" content="Hỏi Dân IT" />
-                <title>Update User</title>
+                <meta name="description" content="Ahryxx - Dự án laptopshop" />
+                <meta name="author" content="Ahryxx" />
+                <title>Update User ${id}</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
             </head>
@@ -46,6 +46,7 @@
                                                     <li class="list-group-item">Role: ${user.role.name}</li>
                                                     <li class="list-group-item">Email: ${user.email}</li>
                                                     <li class="list-group-item">Full Name: ${user.fullName}</li>
+                                                    <li class="list-group-item">Phone Number: ${user.phone}</li>
                                                     <li class="list-group-item">Address: ${user.address}</li>
                                                 </ul>
                                             </div>

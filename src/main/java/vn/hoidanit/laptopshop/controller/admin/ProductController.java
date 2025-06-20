@@ -47,17 +47,15 @@ public class ProductController {
         return "admin/product/create";
     }
 
-    @PostMapping(value = "/admin/product/create")
-    public String CreateUserPage(Model model,
+    @PostMapping("/admin/product/create")
+    public String handleCreateProduct(
             @ModelAttribute("newProduct") @Valid Product pr,
             BindingResult newProductBindingResult,
-            @RequestParam("ahryxxFile") MultipartFile file) {
-
+            @RequestParam("productImage") MultipartFile file) {
         // Validate
         if (newProductBindingResult.hasErrors()) {
             return "/admin/product/create";
         }
-
         // Upload File
         String image = this.uploadService.handleSaveUpLoadFile(file, "product");
         pr.setImage(image);
@@ -76,7 +74,7 @@ public class ProductController {
     @PostMapping("/admin/product/update")
     public String handleUpdateProduct(@ModelAttribute("newProduct") @Valid Product pr,
             BindingResult newProductBindingResult,
-            @RequestParam("ahryxxFile") MultipartFile file) {
+            @RequestParam("productImage") MultipartFile file) {
 
         // Validate
         if (newProductBindingResult.hasErrors()) {

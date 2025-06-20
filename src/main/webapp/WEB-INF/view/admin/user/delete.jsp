@@ -8,8 +8,8 @@
                 <meta charset="utf-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
-                <meta name="author" content="Hỏi Dân IT" />
+                <meta name="description" content="Ahryxx - Dự án laptopshop" />
+                <meta name="author" content="Ahryxx" />
                 <title>Delete</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -41,14 +41,18 @@
                                             </div>
                                             <form:form method="post" action="/admin/user/delete"
                                                 modelAttribute="newUser">
-                                                <div class=mb-3 style="display: none;">
+                                                <div class="mb-3" style="display: none;">
                                                     <label class="form-label">ID :</label>
                                                     <form:input value="${id}" type="text" class="form-control"
                                                         path="id" />
                                                 </div>
-                                                <button class="btn btn-danger">Confirm</button>
+                                                <div class="d-flex gap-2">
+                                                    <button class="btn btn-danger w-50">Confirm</button>
+                                                    <a href="/admin/user" class="btn btn-success w-50">Back</a>
+                                                </div>
                                             </form:form>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>

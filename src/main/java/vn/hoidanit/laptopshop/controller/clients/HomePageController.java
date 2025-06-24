@@ -73,6 +73,13 @@ public class HomePageController {
         return "client/auth/login";
     }
 
+    @GetMapping("/access-denied")
+    public String getDeniedPage(Model model) {
+        // List<User> users = this.userService.getAllUser();
+        // model.addAllAttributes("user", users);
+        return "client/auth/accessDenied";
+    }
+
     // @GetMapping("/register")
     // public String getRegisterPage(Model model) {
     // model.addAttribute("registerUser", new RegisterDTO());

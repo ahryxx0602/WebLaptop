@@ -40,33 +40,8 @@
                     <div class="spinner-grow text-primary" role="status"></div>
                 </div>
                 <!-- Spinner End -->
-
                 <!--HEADER-->
                 <jsp:include page="../layout/header.jsp" />
-
-                <!-- Modal Search Start -->
-                <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-fullscreen">
-                        <div class="modal-content rounded-0">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body d-flex align-items-center">
-                                <div class="input-group w-75 mx-auto d-flex">
-                                    <input type="search" class="form-control p-3" placeholder="keywords"
-                                        aria-describedby="search-icon-1">
-                                    <span id="search-icon-1" class="input-group-text p-3"><i
-                                            class="fa fa-search"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal Search End -->
-
                 <!--BANNER-->
                 <jsp:include page="../layout/banner.jsp" />
 
@@ -150,6 +125,7 @@
 
 
                 <!-- JavaScript Libraries -->
+                <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
                 <script src="/client/lib/easing/easing.min.js"></script>

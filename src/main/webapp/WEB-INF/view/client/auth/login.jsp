@@ -50,6 +50,13 @@
                                                         <div>
                                                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                                         </div>
+                                                        <!-- Remember Me checkbox -->
+                                                        <div class="form-check mb-3">
+                                                            <input class="form-check-input" type="checkbox" name="remember-me" id="rememberMe"/>
+                                                            <label class="form-check-label" for="rememberMe">
+                                                                Remember Me
+                                                            </label>
+                                                        </div>
                                                     <div class="mt-4 mb-0">
                                                         <div class="d-grid"><button
                                                                 class="btn btn-primary btn-block">Login

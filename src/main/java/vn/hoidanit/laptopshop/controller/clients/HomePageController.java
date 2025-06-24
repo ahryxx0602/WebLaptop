@@ -80,17 +80,4 @@ public class HomePageController {
         return "client/auth/accessDenied";
     }
 
-    // @GetMapping("/register")
-    // public String getRegisterPage(Model model) {
-    // model.addAttribute("registerUser", new RegisterDTO());
-    // return "client/auth/register";
-    // }
-
-    // @PostMapping("/login")
-    // public String handleLogin(@ModelAttribute("user"), BindingResult
-    // bindingResult) {
-
-    // return "redirect:/";
-    // }
-
 }

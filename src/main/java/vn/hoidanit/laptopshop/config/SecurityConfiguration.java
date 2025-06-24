@@ -69,12 +69,19 @@ public class SecurityConfiguration {
                         // Bất kỳ request nào cũng cần phải xác thực
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
+
                 .sessionManagement((sessionManagement) -> sessionManagement
+                        // Nếu user chưa có session thì luôn luôn tạo mới
                         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                        // Khi hết hạn session thì log out
                         .invalidSessionUrl("/logout?expired")
+                        // Giới hạn 1 tài khoản đăng nhập được bao nhiêu thiết bị (1)
                         .maximumSessions(1)
+                        // Người thứ 2 đăng nhập vào thì thì đá người thứ nhất ra (false)
+                        // Chờ người thứ nhất dùng hết phiên đăng nhập mới vào (true)
                         .maxSessionsPreventsLogin(false))
 
+                // Mõi 1 lần logout thì xóa cookies này
                 .logout(logout -> logout.deleteCookies("JSESSIONID").invalidateHttpSession(true))
 
                 .formLogin(formLogin -> formLogin
@@ -101,5 +108,4 @@ public class SecurityConfiguration {
         rememberMeServices.setAlwaysRemember(true);
         return rememberMeServices;
     }
-
 }

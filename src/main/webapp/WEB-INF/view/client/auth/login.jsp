@@ -28,16 +28,24 @@
                                                 <p class="text-muted small">Chào mừng bạn quay lại!</p>
                                             </div>
                                             <div class="card-body">
-                                                <form>
+                                                <form method="post" action="/login">
+                                                    <c:if test="${param.error != null}">
+                                                        <div class="my-2" style="color: red;">Invalid email or password.</div>
+                                                  </c:if>                                           
                                                     <div class="form-floating mb-3">
                                                         <input class="form-control" type="email"
-                                                            placeholder="name@example.com"/>
+                                                            placeholder="name@example.com"
+                                                            name="username"/>
                                                         <label>Email address</label>
                                                     </div>
                                                         <div class="form-floating mb-3 mb-md-0">
                                                             <input class="form-control" type="password"
-                                                                placeholder="Create a password"/>
+                                                                placeholder="Create a password"
+                                                                name="password"/>
                                                             <label>Password</label>
+                                                        </div>
+                                                        <div>
+                                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                                         </div>
                                                     <div class="mt-4 mb-0">
                                                         <div class="d-grid"><button

@@ -1,0 +1,30 @@
+                    .order-info-card {
+                        border-radius: 1.5rem;
+                        box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+                        background: #fff;
+                    }
+                    .order-info-title {
+                        font-size: 2rem;
+                        font-weight: 700;
+                        margin-bottom: 1.5rem;
+                    }
+                    .order-info-list .list-group-item {
+                        background: transparent;
+                        border: none;
+                        padding-left: 0;
+                        padding-right: 0;
+                        font-size: 1.1rem;
+                    }
+                    .order-info-total {
+                        font-size: 1.4rem;
+                        font-weight: 700;
+                        color: #198754;
+                    }
+                    .btn-order {
+                        background: #28a745;
+                        color: #fff;
+                    }
+                    .btn-order:hover {
+                        background: #218838;
+                        color: #fff;
+                    }

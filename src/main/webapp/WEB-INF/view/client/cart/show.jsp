@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+        <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
             <html lang="en">
 
             <head>
@@ -59,109 +60,145 @@
                                 </ol>
                             </nav>
                         </div>
-                        <!--Chi tiết giỏ hàng-->
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th scope="col">Sản phẩm</th>
-                                    <th scope="col">Tên</th>
-                                    <th scope="col">Giá cả</th>
-                                    <th scope="col">Số lượng</th>
-                                    <th scope="col">Thành tiền</th>
-                                    <th scope="col">Xử lí</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach var="cartDetail" items="${cartDetails}">
-                                        <tr>
-                                            <th scope="row">
-                                                <div class="d-flex align-items-center">
-                                                    <img src="/images/product/${cartDetail.product.image}"
-                                                        class="img-fluid me-5 rounded-circle"
-                                                        style="width: 80px; height: 80px;" alt="">
-                                                </div>
-                                            </th>
-                                            <td>
-                                                <p class="mb-0 mt-4">
-                                                    <a href="/product/${cartDetail.product.id}" target="_blank">
-                                                        ${cartDetail.product.name}
-                                                    </a>
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="mb-0 mt-4">
-                                                    <fmt:formatNumber type="number"
-                                                        value="${cartDetail.product.price}"/>đ
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <div class="input-group quantity mt-4" style="width: 100px;">
-                                                    <div class="input-group-btn">
-                                                        <button
-                                                            class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                                            <i class="fa fa-minus"></i>
-                                                        </button>
-                                                    </div>
-                                                    <input type="text"
-                                                        class="form-control form-control-sm text-center border-0"
-                                                        value="${cartDetail.quantity}">
-                                                    <div class="input-group-btn">
-                                                        <button
-                                                            class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                                            <i class="fa fa-plus"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <p class="mb-0 mt-4">
-                                                    <fmt:formatNumber type="number"
-                                                        value="${cartDetail.price * cartDetail.quantity}"/>đ
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-md rounded-circle bg-light border mt-4">
-                                                    <i class="fa fa-times text-danger"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!--Tổng tiền giỏ hàng-->
-                        <div class="row justify-content-center mt-5">
-                            <div class="col-12 col-md-8 col-lg-6">
-                                <div class="order-info-card p-4 shadow-lg">
-                                    <h1 class="order-info-title text-center mb-4">
-                                        <i class="fas fa-file-invoice-dollar text-primary me-2"></i>
-                                        Thông tin <span class="fw-normal">Đơn hàng</span>
-                                    </h1>
-                                    <ul class="list-group order-info-list mb-4">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            <span class="fw-medium">Tạm tính:</span>
-                                            <span class="fw-bold text-primary">
-                                                <fmt:formatNumber type="number" value="${totalPrice}"/> đ
-                                            </span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            <span class="fw-medium">Phí vận chuyển</span>
-                                            <span class="text-muted">0 đ</span>
-                                        </li>
-                                    </ul>
-                                    <div class="d-flex justify-content-between align-items-center border-top border-bottom py-3 mb-4">
-                                        <span class="order-info-total">Tổng tiền</span>
-                                        <span class="order-info-total">
-                                            <fmt:formatNumber type="number" value="${totalPrice}"/> đ
-                                        </span>
-                                    </div>
-                                    <button class="btn btn-order w-100 text-uppercase fw-bold d-flex align-items-center justify-content-center gap-2" type="button">
-                                        <i class="fas fa-credit-card"></i> Xác nhận đặt đơn hàng
-                                    </button>
+                        <c:choose>
+                            <c:when test="${empty cartDetails}">
+                                <div class="alert alert-info text-center my-5">
+                                    Không có sản phẩm trong giỏ hàng.
                                 </div>
-                            </div>
-                        </div>
+                            </c:when>
+                            <c:otherwise>
+                                <!--Chi tiết giỏ hàng-->
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Sản phẩm</th>
+                                            <th scope="col">Tên</th>
+                                            <th scope="col">Giá cả</th>
+                                            <th scope="col">Số lượng</th>
+                                            <th scope="col">Thành tiền</th>
+                                            <th scope="col">Xử lí</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="cartDetail" items="${cartDetails}" varStatus="status">
+                                                <tr>
+                                                    <th scope="row">
+                                                        <div class="d-flex align-items-center">
+                                                            <img src="/images/product/${cartDetail.product.image}"
+                                                                class="img-fluid me-5 rounded-circle"
+                                                                style="width: 80px; height: 80px;" alt="">
+                                                        </div>
+                                                    </th>
+                                                    <td>
+                                                        <p class="mb-0 mt-4">
+                                                            <a href="/product/${cartDetail.product.id}" target="_blank">
+                                                                ${cartDetail.product.name}
+                                                            </a>
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="mb-0 mt-4">
+                                                            <fmt:formatNumber type="number"
+                                                                value="${cartDetail.product.price}"/>đ
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group quantity mt-4" style="width: 100px;">
+                                                            <div class="input-group-btn">
+                                                                <button
+                                                                    class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                                                    <i class="fa fa-minus"></i>
+                                                                </button>
+                                                            </div>
+                                                            <input type="text"
+                                                                class="form-control form-control-sm text-center border-0"
+                                                                value="${cartDetail.quantity}"
+                                                                data-cart-detail-id="${cartDetail.id}"
+                                                                data-cart-detail-price="${cartDetail.price}"
+                                                                data-cart-detail-index="${status.index}">
+                                                            <div class="input-group-btn">
+                                                                <button
+                                                                    class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <p class="mb-0 mt-4" data-cart-detail-id="${cartDetail.id}">
+                                                            <fmt:formatNumber type="number"
+                                                                value="${cartDetail.price * cartDetail.quantity}"/>đ
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <form method="post" action="/delete-cart-product/${cartDetail.id}">
+                                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                                            <button class="btn btn-md rounded-circle bg-light border mt-4">
+                                                                <i class="fa fa-times text-danger"></i>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!--Tổng tiền giỏ hàng-->
+                                <div class="row justify-content-center mt-5">
+                                    <div class="col-12 col-md-8 col-lg-6">
+                                        <div class="order-info-card p-4 shadow-lg">
+                                            <h1 class="order-info-title text-center mb-4">
+                                                <i class="fas fa-file-invoice-dollar text-primary me-2"></i>
+                                                Thông tin <span class="fw-normal">Đơn hàng</span>
+                                            </h1>
+                                            <ul class="list-group order-info-list mb-4">
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                    <span class="fw-medium">Tạm tính:</span>
+                                                    <span class="fw-bold text-primary" data-cart-total-price="${totalPrice}">
+                                                        <fmt:formatNumber type="number" value="${totalPrice}"/> đ
+                                                    </span>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                    <span class="fw-medium">Phí vận chuyển</span>
+                                                    <span class="text-muted">0 đ</span>
+                                                </li>
+                                            </ul>
+                                            <div class="d-flex justify-content-between align-items-center border-top border-bottom py-3 mb-4">
+                                                <span class="order-info-total">Tổng số tiền</span>
+                                                <span class="order-info-total" data-cart-total-price="${totalPrice}">
+                                                    <fmt:formatNumber type="number" value="${totalPrice}"/> đ
+                                                </span>
+                                            </div>
+                                            <form:form action="/confirm-checkout" method="post" modelAttribute="cart">
+                                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                                <div style="display: none;">
+                                                    <c:forEach var="cartDetail" items="${cart.cartDetails}" varStatus="status">
+                                                        <div class="mb-3">
+                                                            <div class="form-group">
+                                                                <label>Id:</label>
+                                                                <form:input class="form-control" type="text"
+                                                                    value="${cartDetail.id}"
+                                                                    path="cartDetails[${status.index}].id"/> 
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Quantity:</label>
+                                                                <form:input class="form-control" type="text"
+                                                                    value="${cartDetail.quantity}"
+                                                                    path="cartDetails[${status.index}].quantity"/> 
+                                                            </div>
+                                                        </div>
+                                                    </c:forEach>
+                                                </div>
+                                                <button class="btn btn-order w-100 text-uppercase fw-bold d-flex align-items-center justify-content-center gap-2" type="submit">
+                                                    <i class="fas fa-credit-card"></i> Xác nhận đặt đơn hàng
+                                                </button>
+                                            </form:form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
                 <!--Cart End-->

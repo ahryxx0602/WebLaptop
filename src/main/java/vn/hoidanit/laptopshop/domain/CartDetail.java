@@ -18,7 +18,7 @@ public class CartDetail {
 
     private long quantity;
 
-    private long price;
+    private double price;
 
     @ManyToOne
     @JoinColumn(name = "cart_id")
@@ -60,11 +60,11 @@ public class CartDetail {
         this.product = product;
     }
 
-    public long getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

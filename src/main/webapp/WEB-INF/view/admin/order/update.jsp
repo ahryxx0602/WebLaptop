@@ -47,7 +47,7 @@ isELIgnored="false"%>
               class="row"
               enctype="multipart/form-data"
             >
-              <div class="mb-3">
+              <div class="mb-3 col-12 col-md-6">
                 <label class="form-label">ID :</label>
                 <form:input type="hidden" path="id" />
                 <form:input
@@ -69,7 +69,7 @@ isELIgnored="false"%>
                 </div>
               </div>
 
-              <div class="mb-3">
+              <div class="mb-3 col-12 col-md-6">
                 <label class="form-label">User :</label>
                 <form:input
                   type="text"

@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %> <%@ taglib prefix="c"
-uri="http://java.sun.com/jsp/jstl/core" %> <%@ taglib prefix="fmt"
-uri="http://java.sun.com/jsp/jstl/fmt" %>
+uri="http://java.sun.com/jsp/jstl/core" %> <%@taglib
+uri="http://www.springframework.org/tags/form" prefix="form" %> <%@ taglib
+prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,7 +13,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
     />
     <meta name="description" content="Ahryxx - Dự án laptopshop" />
     <meta name="author" content="Ahryxx" />
-    <title>Manage Order</title>
+    <title>Detail Order</title>
     <link href="/css/styles.css" rel="stylesheet" />
     <script
       src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
@@ -27,50 +28,56 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
       <div id="layoutSidenav_content">
         <main>
           <div class="container-fluid px-4">
-            <h1 class="mt-4">Manage Order</h1>
+            <h1 class="mt-4">Detail Order</h1>
             <ol class="breadcrumb mb-4">
-              <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-              <li class="breadcrumb-item active">Dashboard</li>
+              <li class="breadcrumb-item active">
+                <a href="/admin">Dashboard</a>
+              </li>
+              <li class="breadcrumb-item active">
+                <a href="/admin/order">order</a>
+              </li>
+              <li class="breadcrumb-item active">detail</li>
             </ol>
-            <div>Table Order</div>
-            <hr />
             <table class="table table-bordered table-hover">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Total Price</th>
-                  <th>User</th>
-                  <th>Status</th>
-                  <th>Action</th>
+                  <th>Sản phẩm</th>
+                  <th>Tên</th>
+                  <th>Giá cả</th>
+                  <th>Số lượng</th>
+                  <th>Thành tiền</th>
                 </tr>
               </thead>
               <tbody>
-                <c:forEach var="order" items="${orders}">
+                <c:forEach var="orderDetail" items="${orderDetail}">
                   <tr>
-                    <th>${order.id}</th>
+                    <td>
+                      <img
+                        src="/images/product/${orderDetail.product.image}"
+                        alt="${orderDetail.product.name}"
+                        style="
+                          width: 100px;
+                          height: 100px;
+                          border-radius: 50%;
+                          object-fit: cover;
+                        "
+                      />
+                    </td>
+                    <td>${orderDetail.product.name}</td>
                     <td>
                       <fmt:formatNumber
                         type="number"
-                        value="${order.totalPrice}"
+                        value="${orderDetail.price}"
                       />
                       đ
                     </td>
-                    <td>${order.user.fullName}</td>
-                    <td>${order.status}</td>
+                    <td>${orderDetail.quantity}</td>
                     <td>
-                      <a href="/admin/order/${order.id}" class="btn btn-success"
-                        >View</a
-                      >
-                      <a
-                        href="/admin/order/delete/${order.id}"
-                        class="btn btn-danger mx-2"
-                        >Delete</a
-                      >
-                      <a
-                        href="/admin/order/update/${order.id}"
-                        class="btn btn-warning mx-2"
-                        >Update</a
-                      >
+                      <fmt:formatNumber
+                        type="number"
+                        value="${orderDetail.price * orderDetail.quantity}"
+                      />
+                      đ
                     </td>
                   </tr>
                 </c:forEach>

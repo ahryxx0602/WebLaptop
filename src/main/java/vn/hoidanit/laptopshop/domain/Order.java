@@ -34,7 +34,7 @@ public class Order {
     private String status;
 
     @OneToMany(mappedBy = "order")
-    List<OrderDetail> orderDetails;
+    private List<OrderDetail> orderDetails;
 
     public User getUser() {
         return user;

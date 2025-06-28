@@ -115,16 +115,18 @@ public class ItemController {
             @RequestParam("receiverName") String receiverName,
             @RequestParam("receiverAddress") String receiverAddress,
             @RequestParam("receiverPhone") String receiverPhone) {
+        User currentUser = new User();
         HttpSession session = request.getSession(false);
-        long userId = (long) session.getAttribute("id");
-        // Lấy cart của user
-        User user = new User();
-        user.setId(userId);
-        Cart cart = productService.fetchByUser(user);
+        long id = (long) session.getAttribute("id");
+        currentUser.setId(id);
 
-        // TODO: Tạo Order, OrderDetail từ cart và thông tin người nhận
-        // TODO: Xóa cart sau khi đặt hàng thành công
-
-        return "redirect:/checkout"; // hoặc redirect sang trang thông báo thành công
+        this.productService.handlePlaceOrder(currentUser, session, receiverName, receiverAddress, receiverPhone);
+        return "redirect:/thanks";
     }
+
+    @GetMapping("/thanks")
+    public String getThanksPage(Model model) {
+        return "client/cart/thanks";
+    }
+
 }

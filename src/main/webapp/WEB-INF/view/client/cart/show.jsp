@@ -180,7 +180,7 @@
                                                                 <form:input class="form-control" type="text"
                                                                     value="${cartDetail.id}"
                                                                     path="cartDetails[${status.index}].id"/> 
-                                                            </div>
+                                                            </div> 
                                                             <div class="form-group">
                                                                 <label>Quantity:</label>
                                                                 <form:input class="form-control" type="text"

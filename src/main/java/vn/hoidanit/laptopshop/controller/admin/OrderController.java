@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import vn.hoidanit.laptopshop.domain.Order;
+import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.service.OrderService;
 
 @Controller
@@ -29,6 +31,7 @@ public class OrderController {
         model.addAttribute("orders", orders);
         return "admin/order/show";
     }
+
     @GetMapping("/admin/order/{id}")
     public String getOrderDetailPage(Model model, @PathVariable Long id) {
         Order order = this.orderService.fetchOrderById(id).get();

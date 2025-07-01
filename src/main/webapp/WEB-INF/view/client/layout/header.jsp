@@ -51,7 +51,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="/order-history">
                                                 <i class="fa-solid fa-clock-rotate-left me-2"></i>
                                                 Lịch sử mua hàng
                                             </a>

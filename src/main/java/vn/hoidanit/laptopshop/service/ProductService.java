@@ -58,7 +58,7 @@ public class ProductService {
         this.productRepository.deleteById(id);
     }
 
-    public void handleAddProductToCart(String email, long productId, HttpSession session) {
+    public void handleAddProductToCart(String email, long productId, HttpSession session, long quantity) {
         // 1. Lấy thông tin user theo email
         User user = this.userService.getUserByEmail(email);
         if (user != null) {
@@ -87,19 +87,19 @@ public class ProductService {
                     cartDetail.setCart(cart);
                     cartDetail.setProduct(foundProduct);
                     cartDetail.setPrice(foundProduct.getPrice());
-                    cartDetail.setQuantity(1);
+                    cartDetail.setQuantity(quantity);
                     // Lưu cartDetail
                     this.cartDetailRepository.save(cartDetail);
 
                     // Update cart Sum
                     int sum = cart.getSum() + 1;
-                    cart.setSum(cart.getSum() + 1);
+                    cart.setSum(sum);
                     this.cartRepository.save(cart);
                     session.setAttribute("sum", sum);
 
                 } else {
                     // 5.2. Nếu có rồi thì Quantity + 1
-                    oldDetail.setQuantity(oldDetail.getQuantity() + 1);
+                    oldDetail.setQuantity(oldDetail.getQuantity() + quantity);
                     // Lưu
                     this.cartDetailRepository.save(oldDetail);
                 }

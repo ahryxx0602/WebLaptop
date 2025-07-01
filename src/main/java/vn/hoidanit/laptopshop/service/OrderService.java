@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import vn.hoidanit.laptopshop.domain.Order;
 import vn.hoidanit.laptopshop.domain.OrderDetail;
+import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.repository.OrderDetailRepository;
 import vn.hoidanit.laptopshop.repository.OrderRepository;
 
@@ -16,8 +17,8 @@ public class OrderService {
     private final OrderDetailRepository orderDetailRepository;
 
     public OrderService(
-            OrderRepository orderRepository, 
-            OrderDetailRepository orderDetailRepository){
+            OrderRepository orderRepository,
+            OrderDetailRepository orderDetailRepository) {
         this.orderRepository = orderRepository;
         this.orderDetailRepository = orderDetailRepository;
     }
@@ -31,12 +32,12 @@ public class OrderService {
     }
 
     public void deleteOrderById(Long id) {
-        //delete order details first
+        // delete order details first
         Optional<Order> orderOpt = this.fetchOrderById(id);
-        if(orderOpt.isPresent()) {
+        if (orderOpt.isPresent()) {
             Order order = orderOpt.get();
             List<OrderDetail> orderDetails = order.getOrderDetails();
-            for(OrderDetail orderDetail : orderDetails) {
+            for (OrderDetail orderDetail : orderDetails) {
                 this.orderDetailRepository.deleteById(orderDetail.getId());
             }
         }
@@ -45,10 +46,14 @@ public class OrderService {
 
     public void updateOrder(Order order) {
         Optional<Order> orderOpt = this.fetchOrderById(order.getId());
-        if(orderOpt.isPresent()) {
+        if (orderOpt.isPresent()) {
             Order currentOrder = orderOpt.get();
             currentOrder.setStatus(order.getStatus());
             this.orderRepository.save(currentOrder);
         }
+    }
+
+    public List<Order> fetchOrderByUser(User user) {
+        return this.orderRepository.findByUser(user);
     }
 }

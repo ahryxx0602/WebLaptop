@@ -64,7 +64,8 @@ public class SecurityConfiguration {
                                 DispatcherType.INCLUDE)
                         .permitAll()
                         // Cho phép ai ai cũng truy cập các file có dạng dưới đây
-                        .requestMatchers("/", "/login", "/product/**", "/client/**", "/css/**", "/js/**", "/images/**")
+                        .requestMatchers("/", "/login", "/register", "/product/**", "/client/**", "/css/**", "/js/**",
+                                "/images/**")
                         .permitAll()
                         // Bất kỳ request nào cũng cần phải xác thực
                         .requestMatchers("/admin/**").hasRole("ADMIN")

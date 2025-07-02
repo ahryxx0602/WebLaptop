@@ -156,13 +156,13 @@
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="price-3" value="10-15-trieu">
+                                                        <input class="form-check-input" type="checkbox" id="price-3" value="10-toi-15-trieu">
                                                         <label class="form-check-label" for="price-3">Từ 10 - 15 triệu</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="price-4" value="15-20-trieu">
+                                                        <input class="form-check-input" type="checkbox" id="price-4" value="15-toi-20-trieu">
                                                         <label class="form-check-label" for="price-4">Từ 15 - 20 triệu</label>
                                                     </div>
                                                 </div>
@@ -210,64 +210,78 @@
                                             <div class="row g-4">
                                                 <div class="col-lg-12">
                                                     <div class="row g-4">
-                                                        <c:forEach var="product" items="${products}">
-                                                            <div class="col-md-6 col-lg-4 col-xl-3">
-                                                                <div class="rounded position-relative fruite-item">
-                                                                    <div class="fruite-img">
-                                                                        <img src="/images/product/${product.image}"
-                                                                            class="img-fluid w-100 rounded-top" alt="">
-                                                                    </div>
-                                                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                                        style="top: 10px; left: 10px;">Laptop</div>
-                                                                    <div
-                                                                        class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                                        <h4 style="font-size: 15px;">
-                                                                            <a href="/product/${product.id}">${product.name}</a>
-                                                                        </h4>
-                                                                        <p style="font-size: 13px;">${product.shortDesc}</p>
-                                                                        <div class="d-flex flex-lg-wrap justify-content-center flex-column">
-                                                                            <p style="font-size: 15px; text-align: center; width: 100%;"
-                                                                                class="text-dark fw-bold mb-3">
-                                                                                <fmt:formatNumber type="number"
-                                                                                    value="${product.price}" /> đ
-                                                                            </p>
-                                                                            <form action="/add-product-to-cart/${product.id}" 
-                                                                                    method="post">
-                                                                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                                                                                <button
-                                                                                class="mx-auto btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                                    class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                                                Add to cart
-                                                                            </button>
-                                                                            </form>
-                                                                        </div>
+                                                        <c:choose>
+                                                            <c:when test="${empty products}">
+                                                                <div class="col-12">
+                                                                    <div class="alert alert-warning text-center fw-bold py-4" style="font-size:1.2rem;">
+                                                                        <i class="fa fa-exclamation-circle me-2"></i>Không tìm thấy sản phẩm phù hợp!
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </c:forEach>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <c:forEach var="product" items="${products}">
+                                                                    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 d-flex align-items-stretch">
+                                                                        <div class="rounded position-relative fruite-item w-100 h-100 d-flex flex-column">
+                                                                            <div class="fruite-img">
+                                                                                <img src="/images/product/${product.image}"
+                                                                                    class="img-fluid w-100 rounded-top" alt="">
+                                                                            </div>
+                                                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                                                                style="top: 10px; left: 10px;">Laptop</div>
+                                                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom flex-grow-1 d-flex flex-column justify-content-between">
+                                                                                <h4 style="font-size: 15px;">
+                                                                                    <a href="/product/${product.id}">${product.name}</a>
+                                                                                </h4>
+                                                                                <p style="font-size: 13px;">${product.shortDesc}</p>
+                                                                                <div class="d-flex flex-lg-wrap justify-content-center flex-column mt-auto">
+                                                                                    <p style="font-size: 15px; text-align: center; width: 100%;"
+                                                                                        class="text-dark fw-bold mb-3">
+                                                                                        <fmt:formatNumber type="number"
+                                                                                            value="${product.price}" /> đ
+                                                                                    </p>
+                                                                                    <form action="/add-product-to-cart/${product.id}" 
+                                                                                            method="post">
+                                                                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                                                                        <button
+                                                                                        class="mx-auto btn border border-secondary rounded-pill px-3 text-primary"><i
+                                                                                            class="fa fa-shopping-bag me-2 text-primary"></i>
+                                                                                        Add to cart
+                                                                                    </button>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </c:forEach>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </div>
                                                 </div>
                                             </div>
                                             <nav aria-label="Page navigation example" class="mt-4">
-                                                <ul class="pagination justify-content-center flex-row">
-                                                    <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
-                                                        <a class="page-link" href="/products?page=${currentPage - 1}" aria-label="Previous">
-                                                            <span aria-hidden="true">&laquo;</span>
-                                                        </a>
-                                                    </li>
-                                                    <c:forEach begin="1" end="${totalPages}" var="i">
-                                                        <li class="page-item ${i == currentPage ? 'active' : ''}">
-                                                            <a class="page-link" href="/products?page=${i}">
-                                                                ${i}
+                                                <c:if test="${totalPages > 0}">
+                                                    <ul class="pagination justify-content-center flex-row">
+                                                        <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
+                                                            <a class="page-link" 
+                                                            href="/products?page=${currentPage - 1}${qs}" 
+                                                            aria-label="Previous">
+                                                                <span aria-hidden="true">&laquo;</span>
                                                             </a>
                                                         </li>
-                                                    </c:forEach>
-                                                    <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
-                                                        <a class="page-link" href="/products?page=${currentPage + 1}" aria-label="Next">
-                                                            <span aria-hidden="true">&raquo;</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
+                                                        <c:forEach begin="1" end="${totalPages}" var="i">
+                                                            <li class="page-item ${i == currentPage ? 'active' : ''}">
+                                                                <a class="page-link" href="/products?page=${i}${qs}">
+                                                                    ${i}
+                                                                </a>
+                                                            </li>
+                                                        </c:forEach>
+                                                        <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
+                                                            <a class="page-link" href="/products?page=${currentPage + 1}${qs}" aria-label="Next">
+                                                                <span aria-hidden="true">&raquo;</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </c:if>
                                             </nav>
                                         </div>
                                     </div>

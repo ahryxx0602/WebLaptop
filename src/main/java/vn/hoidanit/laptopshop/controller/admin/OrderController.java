@@ -3,12 +3,16 @@ package vn.hoidanit.laptopshop.controller.admin;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -26,9 +30,28 @@ public class OrderController {
     }
 
     @GetMapping("/admin/order")
-    public String getDashboard(Model model) {
-        List<Order> orders = this.orderService.fetchAllOrders();
-        model.addAttribute("orders", orders);
+    public String getDashboard(Model model,
+            @RequestParam("page") Optional<String> pageOptional) {
+        int page = 1;
+
+        try {
+            if (pageOptional.isPresent()) {
+                // convert from String to int
+                page = Integer.parseInt(pageOptional.get());
+            } else {
+                // page=1
+            }
+        } catch (Exception e) {
+            // page=1
+            // TODO: handle exception
+        }
+        Pageable pageable = PageRequest.of(page - 1, 4);
+        Page<Order> orders = this.orderService.fetchAllOrders(pageable);
+        List<Order> listOrders = orders.getContent();
+        model.addAttribute("orders", listOrders);
+
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", orders.getTotalPages());
         return "admin/order/show";
     }
 

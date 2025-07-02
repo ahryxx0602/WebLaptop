@@ -2,7 +2,11 @@ package vn.hoidanit.laptopshop.controller.clients;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -140,4 +144,34 @@ public class ItemController {
         return "redirect:/product/" + id;
     }
 
+    @GetMapping("/products")
+    public String getProductsPage(Model model,
+            @RequestParam("page") Optional<String> pageOptional,
+            @RequestParam("name") Optional<String> nameOptional) {
+        int page = 1;
+
+        try {
+            if (pageOptional.isPresent()) {
+                // convert from String to int
+                page = Integer.parseInt(pageOptional.get());
+            } else {
+                // page=1
+            }
+        } catch (Exception e) {
+            // page=1
+            // TODO: handle exception
+        }
+
+        String name = nameOptional.get();
+
+        Pageable pageable = PageRequest.of(page - 1, 4);
+        Page<Product> products = this.productService.fetchProducts(pageable, name);
+        List<Product> listProducts = products.getContent();
+
+        model.addAttribute("products", listProducts);
+
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", products.getTotalPages());
+        return "client/product/show";
+    }
 }

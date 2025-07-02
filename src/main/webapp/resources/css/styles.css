@@ -644,7 +644,7 @@ progress {
 }
 
 .blockquote-footer::before {
-    content: "— ";
+    content: "— ";
 }
 
 .img-fluid {
@@ -5282,6 +5282,7 @@ fieldset:disabled .btn {
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+
 @media (prefers-reduced-motion: reduce) {
 
     .page-link,
@@ -8722,6 +8723,7 @@ fieldset:disabled .btn {
 .mt-4 {
     margin-top: 1.5rem !important;
 }
+
 
 .mt-5 {
     margin-top: 3rem !important;

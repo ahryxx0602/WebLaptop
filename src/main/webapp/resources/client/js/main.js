@@ -125,19 +125,20 @@
     $("#videoModal").on("hide.bs.modal", function (e) {
       $("#video").attr("src", $videoSrc);
     });
-  });
-  //Add active class to header
-  const navElement = $("#navbarCollapse");
-  const currentUrl = window.location.pathname;
-  navElement.find("a.nav-link").each(function () {
-    const link = $(this); //get current link in the loop
-    const href = link.attr("href"); // Get the href attribute of the
 
-    if (href === currentUrl) {
-      link.addClass("active");
-    } else {
-      link.removeClass("active");
-    }
+    //add active class to header
+    const navElement = $("#navbarCollapse");
+    const currentUrl = window.location.pathname;
+    navElement.find("a.nav-link").each(function () {
+      const link = $(this); // Get the current link in the loop
+      const href = link.attr("href"); // Get the href attribute of the link
+
+      if (href === currentUrl) {
+        link.addClass("active"); // Add 'active' class if the href matches the current URL
+      } else {
+        link.removeClass("active"); // Remove 'active' class if the href does not match
+      }
+    });
   });
 
   $(".quantity button").on("click", function () {
@@ -159,40 +160,154 @@
     const input = button.parent().parent().find("input");
     input.val(newVal);
 
+    //set form index
     const index = input.attr("data-cart-detail-index");
     const el = document.getElementById(`cartDetails${index}.quantity`);
     $(el).val(newVal);
 
+    //get price
     const price = input.attr("data-cart-detail-price");
     const id = input.attr("data-cart-detail-id");
 
     const priceElement = $(`p[data-cart-detail-id='${id}']`);
-
     if (priceElement) {
       const newPrice = +price * newVal;
       priceElement.text(formatCurrency(newPrice.toFixed(2)) + " đ");
     }
 
-    // Tính lại tổng tiền (subtotal và total)
-    let newTotal = 0;
-    $("input[data-cart-detail-price]").each(function () {
-      const qty = parseInt($(this).val());
-      const price = parseFloat($(this).attr("data-cart-detail-price"));
-      newTotal += qty * price;
-    });
+    //update total cart price
+    const totalPriceElement = $(`p[data-cart-total-price]`);
 
-    // Cập nhật lại cả tạm tính và tổng số tiền
-    $("[data-cart-total-price]").text(formatCurrency(newTotal) + " đ");
+    if (totalPriceElement && totalPriceElement.length) {
+      const currentTotal = totalPriceElement
+        .first()
+        .attr("data-cart-total-price");
+      let newTotal = +currentTotal;
+      if (change === 0) {
+        newTotal = +currentTotal;
+      } else {
+        newTotal = change * +price + +currentTotal;
+      }
+
+      //reset change
+      change = 0;
+
+      //update
+      totalPriceElement?.each(function (index, element) {
+        //update text
+        $(totalPriceElement[index]).text(
+          formatCurrency(newTotal.toFixed(2)) + " đ"
+        );
+
+        //update data-attribute
+        $(totalPriceElement[index]).attr("data-cart-total-price", newTotal);
+      });
+    }
   });
 
   function formatCurrency(value) {
+    // Use the 'vi-VN' locale to format the number according to Vietnamese currency format
+    // and 'VND' as the currency type for Vietnamese đồng
     const formatter = new Intl.NumberFormat("vi-VN", {
       style: "decimal",
-      minimumFractionDigits: 0,
+      minimumFractionDigits: 0, // No decimal part for whole numbers
     });
 
     let formatted = formatter.format(value);
+    // Replace dots with commas for thousands separator
     formatted = formatted.replace(/\./g, ",");
     return formatted;
+  }
+
+  //handle filter products
+  $("#btnFilter").click(function (event) {
+    event.preventDefault();
+
+    let factoryArr = [];
+    let targetArr = [];
+    let priceArr = [];
+    //factory filter
+    $("#factoryFilter .form-check-input:checked").each(function () {
+      factoryArr.push($(this).val());
+    });
+
+    //target filter
+    $("#targetFilter .form-check-input:checked").each(function () {
+      targetArr.push($(this).val());
+    });
+
+    //price filter
+    $("#priceFilter .form-check-input:checked").each(function () {
+      priceArr.push($(this).val());
+    });
+
+    //sort order
+    let sortValue = $('input[name="radio-sort"]:checked').val();
+
+    const currentUrl = new URL(window.location.href);
+    const searchParams = currentUrl.searchParams;
+
+    // Add or update query parameters
+    searchParams.set("page", "1");
+    searchParams.set("sort", sortValue);
+
+    if (factoryArr.length > 0) {
+      searchParams.set("factory", factoryArr.join(","));
+    }
+    if (targetArr.length > 0) {
+      searchParams.set("target", targetArr.join(","));
+    }
+    if (priceArr.length > 0) {
+      searchParams.set("price", priceArr.join(","));
+    }
+
+    // Update the URL and reload the page
+    window.location.href = currentUrl.toString();
+  });
+
+  //handle auto checkbox after page loading
+  // Parse the URL parameters
+  const params = new URLSearchParams(window.location.search);
+
+  // Set checkboxes for 'factory'
+  if (params.has("factory")) {
+    const factories = params.get("factory").split(",");
+    factories.forEach((factory) => {
+      $(`#factoryFilter .form-check-input[value="${factory}"]`).prop(
+        "checked",
+        true
+      );
+    });
+  }
+
+  // Set checkboxes for 'target'
+  if (params.has("target")) {
+    const targets = params.get("target").split(",");
+    targets.forEach((target) => {
+      $(`#targetFilter .form-check-input[value="${target}"]`).prop(
+        "checked",
+        true
+      );
+    });
+  }
+
+  // Set checkboxes for 'price'
+  if (params.has("price")) {
+    const prices = params.get("price").split(",");
+    prices.forEach((price) => {
+      $(`#priceFilter .form-check-input[value="${price}"]`).prop(
+        "checked",
+        true
+      );
+    });
+  }
+
+  // Set radio buttons for 'sort'
+  if (params.has("sort")) {
+    const sort = params.get("sort");
+    $(`input[type="radio"][name="radio-sort"][value="${sort}"]`).prop(
+      "checked",
+      true
+    );
   }
 })(jQuery);

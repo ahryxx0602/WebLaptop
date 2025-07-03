@@ -33,6 +33,11 @@
                     ul.pagination.justify-content-center.flex-row {
                     display: flex;
                     flex-direction: row;
+                    .page-link.disabled {
+                            color: var(--bs-pagination-disabled-color);
+                            pointer-events: none;
+                            background-color: var(--bs-pagination-disabled-bg);
+                        }
                 }
                 </style>
             </head>
